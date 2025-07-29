@@ -1,0 +1,31 @@
+<!-- templates/index.html -->
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Image to Story line Generator</title>
+</head>
+<body>
+    <h1>Upload an Image</h1>
+
+    <form method="POST" enctype="multipart/form-data">
+        <input type="file" name="image" accept="image/*" required>
+        <button type="submit">Generate Story line</button>
+    </form>
+
+    {% if story %}
+        <h2>Uploaded Image:</h2>
+        <img src="{{ url_for('static', filename='temp_image.jpg') }}" alt="Uploaded Image" width="300"><br><br>
+
+        <h2>Generated Story line is :</h2>
+        <p>{{ story }}</p>
+
+        {% if audio_file %}
+            <h2>Audio is here: :</h2>
+            <audio controls>
+                <source src="{{ url_for('audio', filename=audio_file) }}" type="audio/mpeg">
+                Your browser does not support the audio element.
+            </audio>
+        {% endif %}
+    {% endif %}
+</body>
+</html>
